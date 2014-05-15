@@ -1,0 +1,13 @@
+<table class="table">
+    <thead>
+        <th ng-repeat="colName in colNames">{{colName}}</th>
+    </thead>
+    <tbody>
+        <tr ng-repeat-start="model in models" >
+            <td ng-repeat="colName in colNames">{{model[colName]}}</td>
+        </tr>
+        <tr ng-repeat-end>
+            <td table-cell class="detail-layout" colspan="{{colNames.length}}">{{model}}</td>
+        </tr>
+    </tbody>
+</table>

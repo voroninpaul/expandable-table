@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <title>Test page</title>
+    <script type="text/javascript" src="lib/angular.js"></script>
+    <script type="text/javascript" src="lib/lodash.min.js"></script>
+    <script type="text/javascript" src="../build/templates.js"></script>
+    <script type="text/javascript" src="../build/directive.js"></script>
+    <style></style>
+</head>
+<body ng-controller="Ctrl">
+    <accordion-table ng-model="users" detail-layout="test.html"></accordion-table>
+    <a href="" ng-click="click()">Click</a>
+</body>
+<script type="text/javascript">
+    angular.module('app', ['accordion.table'])
+        .controller('Ctrl', function ($scope, $q, $timeout, $templateCache) {
+            $templateCache.put('test.html', '<div>{{test.name}}</div>');
+
+            $scope.users = [
+                {name: 'vasya', age: 21 },
+                {name: 'petya', age: 30 },
+                {name: 'kolya', age: 35 }
+            ];
+
+            $scope.click = function () {
+                $scope.users[0].name = '!!!!!';
+            }
+        });
+</script>
+</html>
