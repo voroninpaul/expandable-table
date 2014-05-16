@@ -1,0 +1,12 @@
+{
+    "name": "artist-dashboard-v2",
+    "version": "0.1.0",
+    "license": "MIT",
+    "private": true,
+    "dependencies": {
+        "angular": "~1.2.0",
+        "angular-animate": "~1.2.0",
+        "lodash": "~2.4.1",
+        "angular-motion": "~0.3.2"
+    }
+}

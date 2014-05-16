@@ -2,30 +2,43 @@
 <html ng-app="app">
 <head>
     <title>Test page</title>
-    <script type="text/javascript" src="lib/angular.js"></script>
-    <script type="text/javascript" src="lib/lodash.min.js"></script>
+    <script type="text/javascript" src="../build/expandable-table-vendor.js"></script>
     <script type="text/javascript" src="../build/templates.js"></script>
-    <script type="text/javascript" src="../build/directive.js"></script>
-    <style></style>
+    <script type="text/javascript" src="../build/expandable-table.js"></script>
 </head>
 <body ng-controller="Ctrl">
-    <accordion-table ng-model="users" detail-layout="test.html"></accordion-table>
-    <a href="" ng-click="click()">Click</a>
+<expandable-table ng-model="users" detail-layout="test.html"></expandable-table>
+<a href="" ng-click="click()">Click</a>
 </body>
+<style>
+    .expandable-layout {
+        width: 100%;
+        overflow: hidden;
+        -webkit-transition: max-height 0.5s ease-in-out;
+        -moz-transition: max-height 0.5s ease-in-out;
+        -o-transition: max-height 0.5s ease-in-out;
+        transition: max-height 0.5s ease-in-out;
+        max-height: 60px;
+    }
+
+    .open {
+        max-height: 0;
+    }
+</style>
 <script type="text/javascript">
-    angular.module('app', ['accordion.table'])
-        .controller('Ctrl', function ($scope, $q, $timeout, $templateCache) {
-            $templateCache.put('test.html', '<div>{{test.name}}</div>');
+    angular.module('app', ['expandableTable'])
+            .controller('Ctrl', function ($scope, $q, $timeout, $templateCache) {
+                $templateCache.put('test.html', '<div>{{model.name}}</div>');
 
-            $scope.users = [
-                {name: 'vasya', age: 21 },
-                {name: 'petya', age: 30 },
-                {name: 'kolya', age: 35 }
-            ];
+                $scope.users = [
+                    {name: 'vasya', age: 21 },
+                    {name: 'petya', age: 30 },
+                    {name: 'kolya', age: 35 }
+                ];
 
-            $scope.click = function () {
-                $scope.users[0].name = '!!!!!';
-            }
-        });
+                $scope.click = function () {
+                    $scope.users.pop();
+                }
+            });
 </script>
 </html>

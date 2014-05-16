@@ -5,15 +5,24 @@ module.exports = function (grunt) {
         concat: {
             js: {
                 src: [
+                    './src/module.js',
                     './src/*.js'
                 ],
-                dest: './build/directive.js'
+                dest: './build/expandable-table.js'
+            },
+            vendor:{
+                src: [
+                    './vendor/angular/angular.js',
+                    './vendor/angular-animate/angular-animate.js',
+                    './vendor/lodash/dist/lodash.js'
+                ],
+                dest: './build/expandable-table-vendor.js'
             }
         },
         html2js: {
             options: {
                 base: '',
-                module: 'accordion.table.templates'
+                module: 'expandableTable.templates'
             },
             app: {
                 src: ['./src/**/*.html'],
@@ -23,7 +32,7 @@ module.exports = function (grunt) {
         watch: {
             frontend: {
                 files: [
-                    'src/*.js'
+                    './src/*.js'
                 ],
                 tasks: ['concat']
             },
