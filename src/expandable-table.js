@@ -28,6 +28,15 @@
 
             $scope.toggleLayout = function (model) {
                 model.active = !model.active;
+
+                if (model.active) {
+                    _.each($scope.models, function (value, key) {
+
+                        if (value !== model) {
+                            value.active = false;
+                        }
+                    });
+                }
             };
         });
 })(angular, _)
