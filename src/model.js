@@ -5,7 +5,6 @@
             function Row (model) {
                 this.active = false;
                 this.model = model;
-
             }
 
             return {
@@ -22,6 +21,9 @@
                 },
                 getHeadings: function (models) {
                     return _.keys(models[0].model)
+                },
+                createModel: function (model) {
+                    return new Row(model);
                 }
             };
         });

@@ -2,7 +2,6 @@
 
 (function (angular) {
     angular.module('expandableTable', [
-        'expandableTable.templates',
-        'ngAnimate'
+        'expandableTable.templates'
     ]);
 })(angular);

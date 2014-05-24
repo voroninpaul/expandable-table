@@ -3,12 +3,11 @@
     <tr>
         <th ng-repeat="heading in headings">{{heading}}</th>
     </tr>
-
     <!-- Table content -->
-    <tr ng-repeat-start="model in models">
-        <td ng-repeat="heading in headings" ng-click="toggleLayout(model)">{{model.model[heading]}}</td>
+    <tr ng-repeat-start="rowModel in rowModels">
+        <td ng-repeat="heading in headings" cell-layout></td>
     </tr>
-    <tr ng-repeat-end>
-        <td class="detail-layout" colspan="{{heading.length}}"><div expandable-layout ng-class="{close:!model.active}" class="expandable-layout"></div></td>
+    <tr ng-repeat-end ng-if="detailTemplate">
+        <td colspan="{{heading.length}}" detail-layout></td>
     </tr>
 </table>

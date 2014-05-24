@@ -1,16 +1,17 @@
 'use strict';
 (function (angular, _) {
     angular.module('expandableTable')
-        .directive('expandableLayout', function ($compile, $templateCache) {
+        .directive('detailLayout', function ($compile, $templateCache) {
             return {
                 restrict: 'A',
                 require: '^expandableTable',
-                template: 'src/expandable-layout.html',
+                template: '<div></div>',
                 link: function (scope, element, attrs) {
-                    scope.$watch('detailLayout', function (tplId) {
+                    scope.$watch('detailTemplate', function (tplId) {
                         var tpl = $templateCache.get(tplId);
-                        var childScope = scope.$new(true);
-                        childScope.model = scope.model.model;
+                        var childScope = scope.$new();
+                        childScope.rowModel = scope.rowModel;
+                        childScope.domainModel = scope.rowModel.model
 
                         //compile the element with its new content and new scope
                         element.html(tpl);

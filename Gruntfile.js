@@ -13,7 +13,6 @@ module.exports = function (grunt) {
             vendor:{
                 src: [
                     './vendor/angular/angular.js',
-                    './vendor/angular-animate/angular-animate.js',
                     './vendor/lodash/dist/lodash.js'
                 ],
                 dest: './build/expandable-table-vendor.js'
