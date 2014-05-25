@@ -22,7 +22,7 @@
     <script type="text/javascript">
         angular.module('app', ['expandableTable', 'ui.bootstrap.collapse'])
             .controller('Ctrl', function ($scope, $q, $timeout, $templateCache) {
-                $templateCache.put('cell.html', '<div ng-click="inheritedParams.toggle(rowModel, rowModels)">{{cellData}}</div>');
+                $templateCache.put('cell.html', '<div ng-click="traversedParams.toggle(rowModel, rowModels)">{{cellData}}</div>');
                 $templateCache.put('detail.html', '<div collapse="!rowModel.active" class="detail-layout">{{domainModel.name}}</div>');
 
                 $scope.users = [
@@ -31,9 +31,9 @@
                     {name: 'kolya', age: 35 }
                 ];
 
-                $scope.inheritedParams = {};
+                $scope.traversedParams = {};
 
-                $scope.inheritedParams.toggle = function (rowModel, rowModels) {
+                $scope.traversedParams.toggle = function (rowModel, rowModels) {
                     rowModel.active = !rowModel.active;
 
                     if (rowModel.active) {
@@ -47,14 +47,26 @@
                 };
 
                 $scope.click = function () {
-                    $scope.users.pop();
+                    $scope.users.splice(0);
+
+                    $scope.users.push({
+                        name: 'ben',
+                        age: 38
+                    })
                 }
+
+                $scope.opts = {};
+
+                $scope.opts.fields = [
+                    {name: 'Name'},
+                    {age: 'Age'}
+                ]
             });
     </script>
 </head>
 <body ng-controller="Ctrl">
 
-<expandable-table ng-model="users" cell-template="cell.html" detail-template="detail.html" inherited-params="inheritedParams">
+<expandable-table ng-model="users" expandable-table-options="opts" cell-template="cell.html" detail-template="detail.html" traversed-params="traversedParams">
 </expandable-table>
 
 <a href="" ng-click="click()">Click</a>

@@ -1,13 +1,13 @@
 <table class="table">
     <!-- Table heading -->
     <tr>
-        <th ng-repeat="heading in headings">{{heading}}</th>
+        <th ng-repeat="heading in headings" head-layout></th>
     </tr>
     <!-- Table content -->
     <tr ng-repeat-start="rowModel in rowModels">
         <td ng-repeat="heading in headings" cell-layout></td>
     </tr>
     <tr ng-repeat-end ng-if="detailTemplate">
-        <td colspan="{{heading.length}}" detail-layout></td>
+        <td colspan="{{headings.length}}" detail-layout></td>
     </tr>
 </table>

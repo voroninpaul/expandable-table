@@ -7,58 +7,25 @@
                 replace: 'true',
                 scope: {
                     scopeModels: '=ngModel',
+                    expandableTableOptions: '=',
+                    traversedParams: '=',
                     cellTemplate: '@',
-                    detailTemplate: '@',
-                    inheritedParams: '='
+                    detailTemplate: '@'
                 },
                 controller: 'accordionCtrl',
                 templateUrl: 'src/expandable-table.html',
-                link: function (scope, element, attrs, ctrl) {
-
-                }
+                link: function (scope, element, attrs, ctrl) {}
             }
         })
         .controller('accordionCtrl', function ($scope, tableService) {
+            var expandableTableOptions = expandableTableOptions || {};
+
             $scope.rowModels = tableService.getModels($scope.scopeModels);
-            $scope.headings = tableService.getHeadings($scope.rowModels);
+
+            $scope.headings = tableService.getHeadings($scope.rowModels, $scope.expandableTableOptions.fields);
 
             $scope.$watchCollection('scopeModels', function (models) {
-                var modelsToAdd = [];
-                var modelsToRemove = [];
-
-                _.each(models, function (model) {
-                    var isPresent = _.find($scope.rowModels, function (rowModel) {
-                        return rowModel.model === model;
-                    });
-
-                    if (!isPresent) {
-                        modelsToAdd.push(model);
-                    }
-                });
-
-                _.each($scope.rowModels, function (rowModel) {
-                    var isPresent = _.find(models, function (model) {
-                        return rowModel.model === model;
-                    });
-
-                    if (!isPresent) {
-                        modelsToRemove.push(rowModel);
-                    }
-                });
-
-                _.each(modelsToRemove, function (rowModel) {
-                    var index = _.indexOf($scope.rowModels, rowModel)
-
-                    $scope.rowModels.splice(index, 1);
-                });
-
-                _.each(modelsToAdd, function (model) {
-                    $scope.rowModels.push(tableService.createModel(model))
-                });
+                tableService.syncModels(models, $scope.rowModels);
             });
-
-            $scope.toggleLayout = function (model) {
-                model.active = !model.active;
-            };
         });
 })(angular, _)
