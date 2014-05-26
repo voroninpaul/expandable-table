@@ -6,7 +6,8 @@ module.exports = function (grunt) {
             js: {
                 src: [
                     './src/module.js',
-                    './src/*.js'
+                    './src/*.js',
+                    './build/templates.js'
                 ],
                 dest: './build/expandable-table.js'
             },
@@ -39,7 +40,7 @@ module.exports = function (grunt) {
                 files: [
                     'src/**/*.html'
                 ],
-                tasks: ['html2js']
+                tasks: ['html2js', 'concat']
             }
         },
         karma: {
@@ -53,5 +54,5 @@ module.exports = function (grunt) {
 
     grunt.registerTask('test', ['karma']);
 
-    grunt.registerTask('up', ['concat', 'html2js', 'watch']);
+    grunt.registerTask('up', ['html2js', 'concat', 'watch']);
 };

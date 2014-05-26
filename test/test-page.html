@@ -15,14 +15,13 @@
         }
     </style>
     <script type="text/javascript" src="../build/expandable-table-vendor.js"></script>
-    <script type="text/javascript" src="../build/templates.js"></script>
     <script type="text/javascript" src="../build/expandable-table.js"></script>
     <script type="text/javascript" src="../vendor/angular-bootstrap/ui-bootstrap.min.js"></script>
     <script type="text/javascript" src="../vendor/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
     <script type="text/javascript">
         angular.module('app', ['expandableTable', 'ui.bootstrap.collapse'])
             .controller('Ctrl', function ($scope, $q, $timeout, $templateCache) {
-                $templateCache.put('cell.html', '<div ng-click="traversedParams.toggle(rowModel, rowModels)">{{cellData}}</div>');
+                $templateCache.put('cell.html', '<div ng-click="traversedParams.toggle(model)">{{model}}</div>');
                 $templateCache.put('detail.html', '<div collapse="!rowModel.active" class="detail-layout">{{domainModel.name}}</div>');
 
                 $scope.users = [
@@ -33,26 +32,22 @@
 
                 $scope.traversedParams = {};
 
-                $scope.traversedParams.toggle = function (rowModel, rowModels) {
-                    rowModel.active = !rowModel.active;
-
-                    if (rowModel.active) {
-                       _.each(rowModels, function (value, key) {
-
-                           if (value !== rowModel) {
-                               value.active = false;
-                           }
-                       });
-                   }
+                $scope.traversedParams.toggle = function (model) {
+                    //rowModel.model.name = 'LOLER';
+//                    rowModel.active = !rowModel.active;
+//
+//                    if (rowModel.active) {
+//                       _.each(rowModels, function (value, key) {
+//
+//                           if (value !== rowModel) {
+//                               value.active = false;
+//                           }
+//                       });
+//                   }
                 };
 
                 $scope.click = function () {
-                    $scope.users.splice(0);
-
-                    $scope.users.push({
-                        name: 'ben',
-                        age: 38
-                    })
+                    $scope.users[0].name = 'LOL!';
                 }
 
                 $scope.opts = {};
@@ -66,8 +61,7 @@
 </head>
 <body ng-controller="Ctrl">
 
-<expandable-table ng-model="users" expandable-table-options="opts" cell-template="cell.html" detail-template="detail.html" traversed-params="traversedParams">
-</expandable-table>
+<expandable-table ng-model="users" expandable-table-options="opts" detail-template="detail.html" traversed-params="traversedParams"></expandable-table>
 
 <a href="" ng-click="click()">Click</a>
 </body>

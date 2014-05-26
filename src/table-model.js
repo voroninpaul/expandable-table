@@ -41,9 +41,6 @@
 
                     return headings;
                 },
-                createModel: function (model) {
-                    return new Row(model);
-                },
                 syncModels: function (newModels, rowModels) {
                     var modelsToAdd = [];
                     var modelsToRemove = [];
@@ -75,7 +72,7 @@
                     });
     
                     _.each(modelsToAdd, function (model) {
-                        rowModels.push(tableService.createModel(model))
+                        rowModels.push(new Row(model))
                     });
                 }
             };

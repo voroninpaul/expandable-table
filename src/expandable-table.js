@@ -20,11 +20,13 @@
         .controller('accordionCtrl', function ($scope, tableService) {
             var expandableTableOptions = expandableTableOptions || {};
 
-            $scope.rowModels = tableService.getModels($scope.scopeModels);
-
-            $scope.headings = tableService.getHeadings($scope.rowModels, $scope.expandableTableOptions.fields);
-
             $scope.$watchCollection('scopeModels', function (models) {
+                $scope.rowModels = tableService.getModels($scope.scopeModels);
+
+                if ($scope.scopeModels.length) {
+                    $scope.headings = tableService.getHeadings($scope.rowModels, $scope.expandableTableOptions.fields);
+                }
+
                 tableService.syncModels(models, $scope.rowModels);
             });
         });
